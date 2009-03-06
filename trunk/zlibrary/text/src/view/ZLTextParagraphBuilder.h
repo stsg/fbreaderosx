@@ -23,7 +23,7 @@
 #include <vector>
 #include <string>
 
-#include <fribidi/fribidi.h>
+#include <fribidi.h>
 
 #include <ZLUnicodeUtil.h>
 

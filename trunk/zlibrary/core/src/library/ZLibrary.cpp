@@ -28,6 +28,11 @@
 #include "../options/ZLConfig.h"
 #include "../network/ZLNetworkManager.h"
 
+#if defined(__MacOSX__)
+#include <CoreServices/CoreServices.h>
+#include <iostream>
+#endif
+
 bool ZLibrary::ourLocaleIsInitialized = false;
 std::string ZLibrary::ourLanguage;
 std::string ZLibrary::ourCountry;
@@ -39,7 +44,11 @@ std::string ZLibrary::ourApplicationImageDirectory;
 std::string ZLibrary::ourApplicationDirectory;
 std::string ZLibrary::ourDefaultFilesPathPrefix;
 
+#if defined(__MacOSX__)
+const std::string ZLibrary::BaseDirectory = BaseDir();
+#else
 const std::string ZLibrary::BaseDirectory = std::string(BASEDIR);
+#endif
 
 void ZLibrary::parseArguments(int &argc, char **&argv) {
 	while ((argc > 2) && (argv[1] != 0) && (argv[2] != 0)) {
@@ -60,7 +69,12 @@ void ZLibrary::parseArguments(int &argc, char **&argv) {
 		argc -= 2;
 		argv += 2;
 	}
+	#if defined(__MacOSX__)
+	ourZLibraryDirectory = BaseDirectory + "/Contents/Resources/zlibrary";
+	#else
 	ourZLibraryDirectory = BaseDirectory + FileNameDelimiter + "zlibrary";
+	#endif
+	
 }
 
 void ZLibrary::shutdown() {
@@ -91,11 +105,31 @@ std::string ZLibrary::replaceRegExps(const std::string &pattern) {
 
 void ZLibrary::initApplication(const std::string &name) {
 	ourApplicationName = name;
+	#if defined(__MacOSX__)
+	ourImageDirectory = replaceRegExps(BaseDir() + "/Contents/Resources/pixmaps");
+	ourApplicationImageDirectory = replaceRegExps(BaseDir() + "/Contents/Resources/pixmaps/%APPLICATION_NAME%");
+	ourApplicationDirectory = BaseDirectory + "/Contents/Resources/" + ourApplicationName;
+	#else
 	ourImageDirectory = replaceRegExps(IMAGEDIR);
 	ourApplicationImageDirectory = replaceRegExps(APPIMAGEDIR);
 	ourApplicationDirectory = BaseDirectory + FileNameDelimiter + ourApplicationName;
+	#endif
 	ourDefaultFilesPathPrefix = ourApplicationDirectory + FileNameDelimiter + "default" + FileNameDelimiter;
 }
+
+#if defined(__MacOSX__)
+std::string ZLibrary::BaseDir() {
+       CFURLRef pluginRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+       CFStringRef macPath = CFURLCopyFileSystemPath(pluginRef, kCFURLPOSIXPathStyle);
+       const char *pathPtr = CFStringGetCStringPtr(macPath, CFStringGetSystemEncoding());
+       std::string str = pathPtr;
+       //printf("Path = %s", pathPtr);
+       CFRelease(pluginRef);
+       CFRelease(macPath);
+       
+       return str;
+}
+#endif
 
 std::string ZLibrary::Language() {
 	if (ourLanguage.empty()) {
@@ -109,6 +143,7 @@ std::string ZLibrary::Language() {
 	}
 	return ourLanguage;
 }
+
 
 std::string ZLibrary::Country() {
 	if (ourCountry.empty() && !ourLocaleIsInitialized) {

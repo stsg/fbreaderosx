@@ -23,8 +23,11 @@ endif
 
 ifeq "$(TARGET_STATUS)" "release"
 	CFLAGS += -O3
-	LDFLAGS += -s
+	ifneq "$(TARGET_ARCH)" "macosx"
+		LDFLAGS += -s
+	endif
 endif
+
 ifeq "$(TARGET_STATUS)" "debug"
 	CFLAGS += -O0 -g
 endif

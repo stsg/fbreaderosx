@@ -35,6 +35,9 @@ public:
 	static std::string Country();
 
 	static const std::string BaseDirectory;
+	#if defined(__MacOSX__)
+	static std::string BaseDir();
+	#endif
 	static const std::string &ZLibraryDirectory();
 
 	static const std::string &ImageDirectory();

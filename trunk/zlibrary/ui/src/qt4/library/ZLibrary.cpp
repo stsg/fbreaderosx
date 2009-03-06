@@ -34,6 +34,9 @@
 #include "../../../../core/src/util/ZLKeyUtil.h"
 #include "../../../../core/src/unix/xmlconfig/XMLConfig.h"
 #include "../../../../core/src/unix/iconv/IConvEncodingConverter.h"
+#if defined(__MacOSX__)
+#include <QtCore/qdir.h>
+#endif
 
 class ZLQtLibraryImplementation : public ZLibraryImplementation {
 
@@ -41,6 +44,9 @@ private:
 	void init(int &argc, char **&argv);
 	ZLPaintContext *createContext();
 	void run(ZLApplication *application);
+	#if defined(__MacOSX__)
+	std::string BaseDir();
+	#endif
 };
 
 void initLibrary() {
@@ -72,6 +78,12 @@ void ZLQtLibraryImplementation::run(ZLApplication *application) {
 		qApp->setLayoutDirection(Qt::RightToLeft);
 	}
 	ZLDialogManager::instance().createApplicationWindow(application);
+	#if defined(__MacOSX__)
+	QDir dir(QApplication::applicationDirPath());
+	dir.cdUp();
+	dir.cd("Frameworks/plugins");
+	QApplication::setLibraryPaths(QStringList(dir.absolutePath()));
+	#endif
 	application->initWindow();
 	qApp->exec();
 	delete application;

@@ -4,7 +4,7 @@ include $(ROOTDIR)/makefiles/config.mk
 INCLUDE = $(QTINCLUDE) $(ZINCLUDE) $(EXTERNAL_INCLUDE)
 
 HEADERS = $(wildcard *.h)
-SOURCES =	$(wildcard *.cpp)
+SOURCES = $(wildcard *.cpp)
 OBJMOC = $(patsubst %.cpp, %.o, $(SRCMOC))
 OBJECTS = $(patsubst %.cpp, %.o, $(SOURCES))
 

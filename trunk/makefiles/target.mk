@@ -15,10 +15,13 @@
 #TARGET_ARCH = ebr
 #UI_TYPE = nanoX
 
-TARGET_ARCH = desktop
-UI_TYPE = gtk
+#TARGET_ARCH = desktop
+#UI_TYPE = gtk
 #UI_TYPE = qt
 #UI_TYPE = qt4
+
+TARGET_ARCH = macosx
+UI_TYPE = qt4
 
 #TARGET_ARCH = pepperpad3
 #UI_TYPE = gtk
@@ -48,5 +51,5 @@ UI_TYPE = gtk
 
 TARGET_STATUS = release
 #TARGET_STATUS = debug
-#ZLSHARED = no
+ZLSHARED = no
 #TARGET_STATUS = profile

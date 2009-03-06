@@ -11,11 +11,14 @@ ZLSHARED = no
 CC = gcc
 AR = ar rsu
 LD = g++
+MOC = moc
 
 CFLAGS = -pipe -fno-exceptions -Wall -Wno-ctor-dtor-privacy -W -DLIBICONV_PLUG
 LDFLAGS =
-EXTERNAL_INCLUDE = -I/sw/include -I/opt/local/include
-EXTERNAL_LIBS = -L/sw/lib -L/opt/local/lib
+EXTERNAL_INCLUDE = -I$(ROOTDIR)/../fribidi-0.10.9 -I$(ROOTDIR)/../liblinebreak-1.1
+EXTERNAL_LIBS = -L$(ROOTDIR)/../fribidi-0.10.9/.libs -L$(ROOTDIR)/../liblinebreak-1.1/.libs -liconv
+
+UILIBS = -framework QtGui -framework QtCore -framework CoreFoundation
 
 RM = rm -rvf
 RM_QUIET = rm -rf
