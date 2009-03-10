@@ -1,14 +1,14 @@
 include $(ROOTDIR)/makefiles/arch/unix.mk
 
 ifeq "$(INSTALLDIR)" ""
-  INSTALLDIR=/usr
+  INSTALLDIR=$(ROOTDIR)/FBReader.app/Contents/Resources
 endif
-IMAGEDIR = $(INSTALLDIR)/share/pixmaps
-APPIMAGEDIR = $(INSTALLDIR)/share/pixmaps/%APPLICATION_NAME%
+IMAGEDIR = $(INSTALLDIR)/pixmaps
+APPIMAGEDIR = $(INSTALLDIR)/pixmaps/%APPLICATION_NAME%
 
 ZLSHARED = no
 
-CC = gcc
+CC = gcc -D __MacOSX__
 AR = ar rsu
 LD = g++
 MOC = moc

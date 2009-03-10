@@ -109,6 +109,11 @@ void ZLibrary::initApplication(const std::string &name) {
 	ourImageDirectory = replaceRegExps(BaseDir() + "/Contents/Resources/pixmaps");
 	ourApplicationImageDirectory = replaceRegExps(BaseDir() + "/Contents/Resources/pixmaps/%APPLICATION_NAME%");
 	ourApplicationDirectory = BaseDirectory + "/Contents/Resources/" + ourApplicationName;
+	std::cout << "ourImageDirectory = " << ourImageDirectory << "\n";
+	std::cout << "ourApplicationImageDirectory = " << ourApplicationImageDirectory << "\n";
+	std::cout << "ourApplicationDirectory = " << ourApplicationDirectory << "\n";
+	std::cout << "ourDefaultFilesPathPrefix = " << ourDefaultFilesPathPrefix << "\n";
+	std::cout << "ourZLibraryDirectory = " << ourZLibraryDirectory << "\n";
 	#else
 	ourImageDirectory = replaceRegExps(IMAGEDIR);
 	ourApplicationImageDirectory = replaceRegExps(APPIMAGEDIR);

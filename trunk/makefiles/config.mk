@@ -6,11 +6,19 @@ LIBMAKE = $(MAKE) ZLSHARED=$(ZLSHARED)
 
 include $(ROOTDIR)/makefiles/arch/$(TARGET_ARCH).mk
 
-BINDIR ?= $(INSTALLDIR)/bin
-LIBDIR ?= $(INSTALLDIR)/lib
-INCDIR ?= $(INSTALLDIR)/include
-SHAREDIR ?= $(INSTALLDIR)/share
-BASEDIR ?= $(SHAREDIR)
+ifeq "$(TARGET_ARCH)" "macosx"
+	BINDIR ?= $(INSTALLDIR)/../MacOS/
+	LIBDIR ?= $(INSTALLDIR)
+	INCDIR ?= $(INSTALLDIR)
+	SHAREDIR ?= $(INSTALLDIR)
+	BASEDIR ?= $(SHAREDIR)
+else
+	BINDIR ?= $(INSTALLDIR)/bin
+	LIBDIR ?= $(INSTALLDIR)/lib
+	INCDIR ?= $(INSTALLDIR)/include
+	SHAREDIR ?= $(INSTALLDIR)/share
+	BASEDIR ?= $(SHAREDIR)
+endif
 
 XML_LIBS ?= -lexpat
 ARCHIVER_LIBS ?= -lz -lbz2
