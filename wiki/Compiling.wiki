@@ -1,0 +1,16 @@
+#summary Compilation How To
+
+= Compilation =
+
+To compile you should place source of ... and ... on the same level as FBReader source
+
+{{{
+
+cd /Users/user/src
+tar xvzf 
+
+tar xvzf 
+
+tar xvzf
+
+}}}
