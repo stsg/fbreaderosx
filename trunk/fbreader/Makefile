@@ -33,6 +33,7 @@ APPIMAGEDIR_REAL = $(subst \\\\,/,$(subst %APPLICATION_PATH%\\\\,/,$(subst %appl
 do_install:
 	@install -d $(DESTDIR)$(BINDIR)
 	@install $(TARGET) $(DESTDIR)$(BINDIR)/FBReader
+	@strip $(DESTDIR)$(BINDIR)/FBReader
 	@install -d $(FBSHAREDIR)
 	@install -d $(FBSHAREDIR)/help
 	@./scripts/install_help.sh $(VARIANT) $(FBSHAREDIR)/help
