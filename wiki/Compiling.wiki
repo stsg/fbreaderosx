@@ -8,7 +8,7 @@ To compile you should place source of fribidi and liblinebreak on the same level
 cd /Users/user/src
 svn checkout http://fbreaderosx.googlecode.com/svn/trunk/ fbreaderosx
 tar xvzf fribidi-0.10.9.tar.gz
-tar xvzf liblinebreak-1.tar.gz
+tar xvzf liblinebreak-1.1.tar.gz
 }}}
 
 configure and make in each of library sources directory:
