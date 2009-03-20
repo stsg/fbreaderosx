@@ -18,7 +18,9 @@ cd fribidi-0.10.9
 configure
 make
 
-cd ../liblinebreak-1.1
+cd ..
+
+cd liblinebreak-1.1
 configure
 make
 }}}
@@ -30,13 +32,13 @@ cd fbreaderosx
 make
 }}}
 
-to create FBReader.app you should make install in fbreader directory
+to create FBReader.app you should make install in fbreader directory:
 
 {{{
 make install
 }}}
 
-make install creates FBRader.app in fbreeaderosx source directory, you can launch it
+make install creates FBRader.app in fbreeaderosx source directory, you can launch it:
 
 {{{
 open FBReader.app
